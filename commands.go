@@ -122,3 +122,24 @@ func resetHandler(state *state) error {
 	fmt.Println("Records were reset successfully")
 	return nil
 }
+
+func usersHandler(state *state) error {
+	users, err := state.db.GetUsers(context.Background())
+	if err != nil {
+		return fmt.Errorf("error retrieving the users from db")
+	}
+
+	for _, dbUser := range users {
+		printUser(dbUser, state.cfg.CurrentUserName)
+	}
+
+	return nil
+}
+
+func printUser(user database.User, current string) {
+	if user.Name == current {
+		fmt.Printf(" * %v (current)\n", user.Name)
+	} else {
+		fmt.Printf(" * %v\n", user.Name)
+	}
+}

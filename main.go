@@ -58,6 +58,10 @@ func main()  {
 	cmds.register("reset", func(s *state, c command) error {
 		return resetHandler(s)
 	})
+
+	cmds.register("users", func(s *state, c command) error {
+		return usersHandler(s)
+	})
 	
 
 	if len(os.Args) < 2 {
@@ -74,9 +78,11 @@ func main()  {
 	}
 
 	err = cmds.Run(&st, cmd)
+	
 	if err != nil {
 		fmt.Println("Error running command:", err)
 		os.Exit(1)
 	}
+
 	
 }
