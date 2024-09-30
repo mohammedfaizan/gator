@@ -84,6 +84,8 @@ func main()  {
 
 	cmds.register("browse", middlewareLoggedIn(handlerBrowse))
 
+	cmds.register("scrape", middlewareLoggedIn(scrapeFeeds))
+
 	if len(os.Args) < 2 {
 		fmt.Println("Error: Not enough arguments provided")
 		os.Exit(1)

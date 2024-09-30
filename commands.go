@@ -440,7 +440,7 @@ func printFeedFollowing(feedFollow database.GetFeedFollowsForUserRow) {
 	fmt.Println("Feed Name: ", feedFollow.FeedName)
 }
 
-func scrapeFeeds(s *state) error {
+func scrapeFeeds(s *state, c command, user database.User) error {
 	nextFeed, err := s.db.GetNextFeedToFetch(context.Background())
 	if err != nil {
 		fmt.Println("there was an err", err)
