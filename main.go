@@ -62,7 +62,27 @@ func main()  {
 	cmds.register("users", func(s *state, c command) error {
 		return usersHandler(s)
 	})
-	
+
+	cmds.register("agg", func(s *state, c command) error {
+		return aggHandler(command{
+			Name: "url",
+			ArgSlice: []string{"https://wagslane.dev/index.xml", "10s"},
+		})
+	})
+
+	cmds.register("addfeed", middlewareLoggedIn(addFeedHandler))
+
+	cmds.register("feeds", func(s *state, c command) error {
+		return feedHandler(s)
+	})
+
+	cmds.register("follow", middlewareLoggedIn(followHandler))
+
+	cmds.register("following", middlewareLoggedIn(followingHandler))
+
+	cmds.register("unfollow", middlewareLoggedIn(unfollowHandler))
+
+	cmds.register("browse", middlewareLoggedIn(handlerBrowse))
 
 	if len(os.Args) < 2 {
 		fmt.Println("Error: Not enough arguments provided")

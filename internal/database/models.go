@@ -5,8 +5,38 @@
 package database
 
 import (
+	"database/sql"
 	"time"
 )
+
+type Feed struct {
+	ID            string
+	CreatedAt     time.Time
+	UpdatedAt     time.Time
+	Name          string
+	Url           string
+	UserID        sql.NullString
+	LastFetchedAt sql.NullTime
+}
+
+type FeedFollow struct {
+	ID        string
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	UserID    sql.NullString
+	FeedID    sql.NullString
+}
+
+type Post struct {
+	ID          string
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
+	Title       string
+	Url         string
+	Description sql.NullString
+	PublishedAt sql.NullTime
+	FeedID      string
+}
 
 type User struct {
 	ID        string
